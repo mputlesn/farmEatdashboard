@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 declare var firebase
-declare var google: any;
+declare var google;
 
 @Injectable({
   providedIn: 'root'
 })
 export class statsService {
-  farmArray
-  geocoder = new google.maps.Geocoder;
+  farmArray = []
+  //geocoder = new google.maps.Geocoder;
   constructor() { }
 
   getallFarms(){
@@ -25,7 +25,7 @@ export class statsService {
         var keys:any =Object.keys(farms2)
         
   
-        this.farmArray.length = 0;
+        // this.farmArray.length = 0;
         console.log(keys);
         for(var i =0 ; i <keys.length;i++){
           var  k =keys[i];
@@ -62,6 +62,9 @@ export class statsService {
                 products:FarmDetails[k3].products,
                 farmRate: FarmDetails[k3].farmRate
               }
+
+              console.log("All te farms");
+              console.log(this.farmArray)
               this.farmArray.push(obj)
               console.log(this.farmArray)
              }
@@ -79,25 +82,25 @@ export class statsService {
   })
   }
 
-  geocodeLatLng(location) {
-    return new Promise((resolve, reject) => {
-      this.geocoder.geocode({ 'location': location }, function (results, status) {
-        if (status === 'OK') {
-          console.log('OK');
-          console.log(status);
-          let locName = results[0].formatted_address;
-          this.destinationAddress = locName;
-          console.log("Location Push:" + this.destinationAddress);
-        } else {
-          console.log(' not OK' + status);
+  // geocodeLatLng(location) {
+  //   return new Promise((resolve, reject) => {
+  //     this.geocoder.geocode({ 'location': location }, function (results, status) {
+  //       if (status === 'OK') {
+  //         console.log('OK');
+  //         console.log(status);
+  //         let locName = results[0].formatted_address;
+  //         this.destinationAddress = locName;
+  //         console.log("Location Push:" + this.destinationAddress);
+  //       } else {
+  //         console.log(' not OK' + status);
 
-          window.alert('Geocoder failed due to: ' + status);
-        } resolve(this.destinationAddress);
-      }, (error) => {
-        reject(error);
-      });
-    });
-  }
+  //         window.alert('Geocoder failed due to: ' + status);
+  //       } resolve(this.destinationAddress);
+  //     }, (error) => {
+  //       reject(error);
+  //     });
+  //   });
+  // }
 
 
   gettingGeoStats(lat, lng){
