@@ -1,0 +1,33 @@
+.flex1{
+    display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 16px;
+  /* grid-gap: 50px; */
+}
+.flex2{
+    display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 16px;
+  /* grid-gap: 50px; */
+}
+#myChart{
+    border: 2px solid red;
+    height: 40%;
+    width: 40%;
+}
+#Chart{
+    border: 2px solid red;
+    height: 40%;
+    width: 40%;
+}
+#Chart1{
+    border: 2px solid red;
+    height: 40%;
+    width: 40%;
+} 
+#Chart2{
+    border: 2px solid red;
+    height: 40%;
+    width: 40%;
+    
+}
