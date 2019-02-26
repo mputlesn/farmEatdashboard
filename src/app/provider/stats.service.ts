@@ -121,5 +121,23 @@ export class statsService {
    
    }
 
+<<<<<<< HEAD
    
+=======
+   getTypeViews(){
+    return new Promise ((resolve, reject) =>{
+      firebase.database().ref("FarmViews/Traditional Farming").on('value' , (data:any)=>{
+        
+      })
+      firebase.database().ref("FarmViews/Vertical Farming").on('value' , (data:any)=>{
+  
+      })
+      firebase.database().ref("FarmViews/Green House").on('value' , (data:any)=>{
+  
+      })
+    })
+   }
+
+
+>>>>>>> e8cb9c1b21a2bf98d53aac0f8a8fd720ce649ae6
 }
