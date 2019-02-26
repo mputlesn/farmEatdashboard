@@ -60,7 +60,8 @@ export class statsService {
                 liveStock:FarmDetails[k3].liveStock ,
                 facebook:FarmDetails[k3].facebook,
                 products:FarmDetails[k3].products,
-                farmRate: FarmDetails[k3].farmRate
+                farmRate: FarmDetails[k3].farmRate ,
+                city :FarmDetails[k3].city
               }
 
               console.log("All te farms");

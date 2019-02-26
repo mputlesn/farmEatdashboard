@@ -23,11 +23,15 @@ export class DashboardComponent implements OnInit {
   chart4 = []; 
   totalVerticalFarming = 0
   totalGreenHouse = 0
-  totalTraditionalFarming = 0
-
+  totalTraditionalFarming = 0 
+  cityArray = []
+  cities = [] ;
+  derick = [] ;
   constructor(private stats: statsService) { }
 
   ngOnInit() {
+
+    this.getCities()
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -362,6 +366,8 @@ export class DashboardComponent implements OnInit {
           }
         }
       });
+
+
   }
 
   getFarmGeoStats(){
@@ -418,14 +424,98 @@ export class DashboardComponent implements OnInit {
 
   getCities (){
     this.stats.getallFarms().then((data:any)=>{
-      var cities = data ;
-      for (let index = 0; index < cities.length; index++) {
-         // this.cpush(cities.city)
+      console.log(data);
+      
+      this.cities = data ;
+      console.log(this.cities);
+      
+      for (let index = 0; index < this.cities.length; index++) {
+        //this.cityArray.push(this.cities[index].city) ;
        
-        
+        this.chartCity(this.cities[index].city)
       }
+      this.goCheck();
     })
+    
+    
+console.log(this.cityArray);
 
-     
+  
+  }
+
+  chartCity (city){
+    var x = 0;
+    city = city.toLowerCase() ;
+    
+    for (let index = 0; index < this.cityArray.length; index++) {
+       x = 0;
+      if (city == this.cityArray[index]){
+        x = 1;
+        break;
+      }
+    }
+    if (x != 1){
+      this.cityArray.push(city)
+    }  
+  }
+
+  goCheck (){
+    for (let index = 0; index < this.cityArray.length; index++) {
+      var value = 0;
+      console.log(this.cityArray[index]);
+      
+    for (let index2 = 0; index2 < this.cities.length; index2++) {
+     if(this.cityArray[index] == this.cities[index2].city.toLowerCase()){
+       value++;
+     }
+     console.log(value);
+    }
+ 
+    this.derick.push(value) ;
+    console.log(this.derick);
+    }
+    this.load();
+  }
+
+  load(){
+    console.log(this.derick);
+    
+    var ctx = document.getElementById("Chart2");
+    this.chart3 = new Chart("Chart2", {
+        type: 'bar',
+        data: {
+          labels: this.cityArray,
+          datasets: [{
+            label: 'my data',
+            data:     this.derick,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
   }
 }
